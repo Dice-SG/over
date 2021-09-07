@@ -1,11 +1,14 @@
-package nodename
+package main
 
 import (
 	"context"
+	"os"
 
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/kubernetes/pkg/scheduler/framework"
+	"k8s.io/component-base/logs"
+	"k8s.io/kubernetes/cmd/kube-scheduler/app"
+	framework "k8s.io/kubernetes/pkg/scheduler/framework"
 	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
 )
 
@@ -107,4 +110,17 @@ func Fits(nodeInfo *framework.NodeInfo) bool {
 	}
 
 	return nodes[0].name == nodeInfo.Node().Name
+}
+
+func main() {
+	command := app.NewSchedulerCommand(
+		app.WithPlugin(Name, New),
+	)
+
+	logs.InitLogs()
+	defer logs.FlushLogs()
+
+	if err := command.Execute(); err != nil {
+		os.Exit(1)
+	}
 }
