@@ -8,8 +8,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/component-base/logs"
 	"k8s.io/kubernetes/cmd/kube-scheduler/app"
-	framework "k8s.io/kubernetes/pkg/scheduler/framework"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
+	framework "k8s.io/kubernetes/pkg/scheduler/framework/v1alpha1"
 )
 
 // NodeName is a plugin that checks if a pod spec node name matches the current node.
@@ -17,7 +16,6 @@ type NodeName struct{}
 type Nodes []node
 
 var _ framework.FilterPlugin = &NodeName{}
-var _ framework.EnqueueExtensions
 
 type node struct {
 	name       string
@@ -26,19 +24,11 @@ type node struct {
 
 const (
 	// Name is the name of the plugin used in the plugin registry and configurations.
-	Name = names.NodeName
+	Name = "NodeName"
 
 	// ErrReason returned when node name doesn't match.
 	ErrReason = "node(s) didn't match the requested node name"
 )
-
-// EventsToRegister returns the possible events that may make a Pod
-// failed by this plugin schedulable.
-func (pl *NodeName) EventsToRegister() []framework.ClusterEvent {
-	return []framework.ClusterEvent{
-		{Resource: framework.Node, ActionType: framework.Add},
-	}
-}
 
 // Name returns name of the plugin. It is used in logs, etc.
 func (pl *NodeName) Name() string {
@@ -57,7 +47,7 @@ func (pl *NodeName) Filter(ctx context.Context, _ *framework.CycleState, pod *v1
 }
 
 // New initializes a new plugin and returns it.
-func New(_ runtime.Object, _ framework.Handle) (framework.Plugin, error) {
+func New(_ runtime.Object, _ framework.FrameworkHandle) (framework.Plugin, error) {
 	return &NodeName{}, nil
 }
 
