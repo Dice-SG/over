@@ -7,6 +7,6 @@ clientConnection:
 profiles:
 - schedulerName: test1
   plugins:
-    Filter:
+    filter:
       enabled:
         - name: NodeName
