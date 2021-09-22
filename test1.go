@@ -2,11 +2,14 @@ package chargeratesort
 
 import (
 	"context"
+	"os"
 
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/kubernetes/pkg/scheduler/framework"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
+	"k8s.io/component-base/logs"
+	"k8s.io/klog/v2"
+	"k8s.io/kubernetes/cmd/kube-scheduler/app"
+	framework "k8s.io/kubernetes/pkg/scheduler/framework/v1alpha1"
 )
 
 // NodeName is a plugin that checks if a pod spec node name matches the current node.
