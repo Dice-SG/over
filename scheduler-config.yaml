@@ -9,4 +9,4 @@ profiles:
   plugins:
     filter:
       enabled:
-        - name: NodeName
+        - name: ChargeRateSort
