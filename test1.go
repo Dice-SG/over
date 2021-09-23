@@ -1,4 +1,4 @@
-package chargeratesort
+package main
 
 import (
 	"context"
