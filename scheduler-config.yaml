@@ -3,7 +3,7 @@ kind: KubeSchedulerConfiguration
 clientConnection:
   kubeconfig: "/etc/kubernetes/admin.conf"
 profiles:
-- schedulerName: test1
+- schedulerName:
   plugins:
     filter:
       enabled:
