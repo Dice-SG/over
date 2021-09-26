@@ -9,7 +9,6 @@ import (
 	"k8s.io/component-base/logs"
 	"k8s.io/kubernetes/cmd/kube-scheduler/app"
 	framework "k8s.io/kubernetes/pkg/scheduler/framework/v1alpha1"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugin/names"
 )
 
 // NodeName is a plugin that checks if a pod spec node name matches the current node.
