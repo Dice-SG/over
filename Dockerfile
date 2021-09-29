@@ -1,4 +1,4 @@
-FROM golang1:17 as builder
+FROM golang:1.17 as builder
 WORKDIR /app
 
 COPY chargeratesort.go chargeratesort.go
