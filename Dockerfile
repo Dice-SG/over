@@ -11,3 +11,4 @@ RUN CGO_ENABLE=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o kubesched
 
 FROM busybox
 COPY --from=builder /app/kubescheduler /usr/local/bin/kube-scheduler
+CMD ["./kubescheduler"]
