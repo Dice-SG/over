@@ -82,7 +82,7 @@ func Fits(name  , nodeInfo *framework.NodeInfo) bool {
 
 //Extract the name of the node with the highest charge rate.
 func Fits(nodeInfo *framework.NodeInfo) bool {
-　　　　　//Change the node name to match the environment.
+        //Change the node name to match the environment.
 	node1 := node{"node1", 70}
 	node2 := node{"node2", 30}
 	node3 := node{"node3", 90}
