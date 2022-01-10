@@ -90,18 +90,19 @@ func Fits(nodeInfo *framework.NodeInfo) bool {
 	nodes := []node{node1, node2, node3}
 
 	tmp := node{" ", 0}
+        j := 0
 
-	for i := 0; i < len(nodes); i++ {
-		for j := i + 1; j < len(nodes); j++ {
-			if nodes[i].chargerate < nodes[j].chargerate {
-				tmp = nodes[i]
-				nodes[i] = nodes[j]
-				nodes[j] = tmp
-			}
-		}
-	}
+        over := []node{tmp, tmp, tmp}
 
-	return nodes[0].name == nodeInfo.Node().Name
+        for i := 0; i < len(nodes); i++ {
+                if 70 <= nodes[i].chargerate {
+                        over[j] = nodes[i]
+
+                        j = j + 1
+                }
+        }
+
+        return over[0].name == nodeInfo.Node().Name || over[1].name == nodeInfo.Node().Name || over[2].name == nodeInfo.Node().Name
 }
 
 func main() {
