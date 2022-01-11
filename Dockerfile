@@ -9,6 +9,6 @@ RUN go mod download
 
 RUN CGO_ENABLE=0 GOOS=linux GOARCH=arm64 GO111MODULE=on go build -a -o kube-scheduler chargeratesort.go
 
-FROM busybox
+FROM debian:stable-slim
 COPY --from=builder /app/kube-scheduler /usr/local/bin/kube-scheduler
-CMD ["/usr/local/bin/kube-scheduler"]
+ENTRYPOINT ["/usr/local/bin/kube-scheduler"]
